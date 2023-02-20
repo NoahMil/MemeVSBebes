@@ -8,7 +8,7 @@ public class Kid
     public int spawnTime;
     public KidType kidType;
     public int Spawner;
-    public bool RandomSpawner;
+    public bool RandomSpawn;
     public bool isSpawned;
 }
 

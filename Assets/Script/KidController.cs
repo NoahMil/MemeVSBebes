@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KidController : MonoBehaviour
 {
-    public int Health;
-    public int Damage;
-    public float movementSpeed;
+    [SerializeField] private  int _health;
+    [SerializeField] private  int _damage;
+    [SerializeField] private  float movementSpeed;
     private bool isStopped;
     private void Update()
     {
@@ -20,6 +21,16 @@ public class KidController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isStopped = true;
+        }
+    }
+
+    public void ApplyDamage(int _damage)
+    {
+        _health -= _damage;
+        if (_health <= 0)
+        {
+            transform.parent.GetComponent<SpawnPosition>().kids.Remove(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
