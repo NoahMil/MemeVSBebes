@@ -10,15 +10,44 @@ public class KidController : MonoBehaviour
     [SerializeField] private  int _damage;
     [SerializeField] private  float movementSpeed;
     private bool isStopped;
-    private void Update()
+    
+ 
+    
+    public float scanRadius = 3f;
+    public LayerMask filterMask;
+    private KidSpawner KS; 
+    private Collider2D checkCollider;
+    
+    public delegate void UIEvent();
+    public static event UIEvent OnUpdateScore;
+    
+    void Awake()
     {
-        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
-        
+        KS = FindObjectOfType<KidSpawner>();
     }
 
-    public void OnTriggerEnter(Collider other)
+    void Update()
     {
-        if (other.gameObject.CompareTag("Player"))
+        checkCollider = Physics2D.OverlapCircle(transform.position, scanRadius, filterMask);
+        if (checkCollider != null && checkCollider.transform != transform)
+        {
+            Destroy(checkCollider.gameObject);
+        }
+        
+        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
+
+    }
+    
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, scanRadius);
+    }
+    
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == 6)
         {
             isStopped = true;
         }
@@ -29,8 +58,8 @@ public class KidController : MonoBehaviour
         _health -= _damage;
         if (_health <= 0)
         {
-            transform.parent.GetComponent<SpawnPosition>().kids.Remove(this.gameObject);
             Destroy(gameObject);
+            OnUpdateScore?.Invoke();
         }
     }
 }

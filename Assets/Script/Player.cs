@@ -10,15 +10,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform[] _playerLane;
-    private int _playerPosition = 1;
+    private int _playerPosition = 2;
     
     public GameObject bullet;
     [SerializeField] private  int _health;
     [SerializeField] private  int _damage;
     [SerializeField] private float DelayValue = 2f;
     private bool _isArleadyFiring = false;
+
     
-    
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && _playerPosition > 0)
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
             gameObject.transform.position = _playerLane[_playerPosition].position;
         }
         
-        if (Input.GetKeyDown(KeyCode.DownArrow) && _playerPosition < 3)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && _playerPosition < 4)
         {
             _playerPosition++;
             gameObject.transform.position = _playerLane[_playerPosition].position;

@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private  float speed;
+    [SerializeField] private float speed;
     public int _damage;
+
     void Update()
     {
-        transform.Translate(new Vector3(speed* Time.deltaTime, 0 ,0));
+        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
     }
 
-    /*
-    public void OnTriggerEnter(Collider other)
+
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-       other.gameObject.GetComponent<KidController>().ApplyDamage(_damage);
-       Destroy(gameObject);
-    }*/
+        if (collision.gameObject.layer == 7)
+        {
+            collision.gameObject.GetComponent<KidController>().ApplyDamage(_damage);
+            Destroy(gameObject);
+        }
+    }
 }
