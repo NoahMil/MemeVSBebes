@@ -127,12 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 6
-  _damage: 0
+  _damage: 2
   movementSpeed: 1
-  scanRadius: 0.9
-  filterMask:
-    serializedVersion: 2
-    m_Bits: 128
+  DelayValue: 1
 --- !u!50 &4829922546511664877
 Rigidbody2D:
   serializedVersion: 4

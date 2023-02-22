@@ -6,50 +6,35 @@ using UnityEngine;
 
 public class KidController : MonoBehaviour
 {
+    public Player player;
     [SerializeField] private  int _health;
     [SerializeField] private  int _damage;
     [SerializeField] private  float movementSpeed;
-    private bool isStopped;
-    
- 
-    
-    public float scanRadius = 3f;
-    public LayerMask filterMask;
-    private KidSpawner KS; 
-    private Collider2D checkCollider;
+    public float DelayValue = 2f;
+    private bool _isArleadyAttacking = false;
     
     public delegate void UIEvent();
     public static event UIEvent OnUpdateScore;
     
-    void Awake()
-    {
-        KS = FindObjectOfType<KidSpawner>();
-    }
-
     void Update()
     {
-        checkCollider = Physics2D.OverlapCircle(transform.position, scanRadius, filterMask);
-        if (checkCollider != null && checkCollider.transform != transform)
-        {
-            Destroy(checkCollider.gameObject);
-        }
-        
         transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
-
     }
     
-    protected void OnDrawGizmos()
+    public  void OnTriggerEnter2D(Collider2D other)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, scanRadius);
-    }
-    
-
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.CompareTag("DestructionZone"))
         {
-            isStopped = true;
+            Destroy(gameObject);
+        }
+    }
+    
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            Debug.Log("Trigger!");
+            Attack();
         }
     }
 
@@ -61,5 +46,21 @@ public class KidController : MonoBehaviour
             Destroy(gameObject);
             OnUpdateScore?.Invoke();
         }
+    }
+    
+    protected void Attack()
+    {
+        if (!_isArleadyAttacking)
+        {
+            StartCoroutine(AttackwithDelay());
+            _isArleadyAttacking = true;
+
+        }
+    }
+    IEnumerator AttackwithDelay()
+    {
+        yield return new WaitForSeconds(DelayValue);
+        player.ApplyDamage(_damage);
+        _isArleadyAttacking = false;
     }
 }

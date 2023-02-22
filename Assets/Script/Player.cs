@@ -10,15 +10,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform[] _playerLane;
-    private int _playerPosition = 2;
-    
-    public GameObject bullet;
-    [SerializeField] private  int _health;
-    [SerializeField] private  int _damage;
-    [SerializeField] private float DelayValue = 2f;
-    private bool _isArleadyFiring = false;
+    [SerializeField] private PlayerDatas _playerData;
 
+    private int _playerPosition = 2;
+    public GameObject bullet;
+    public  int _damage;
+    public float DelayValue = 2f;
+    private bool _isArleadyFiring = false;
     
+    public delegate void UIEvent();
+    public static event UIEvent OnUpdateHealth;
+
+    private void Start()
+    {
+        _playerData.LifePoint = _playerData.MaxLifePoint;
+        OnUpdateHealth?.Invoke();
+    }
 
     private void Update()
     {
@@ -39,7 +46,18 @@ public class Player : MonoBehaviour
             Fire();
         }
     }
-    
+
+    public void ApplyDamage(int _damage)
+    {
+        _playerData.LifePoint -= _damage;
+        if (_playerData.LifePoint <= 0)
+        {
+            Destroy(gameObject);
+        }
+        OnUpdateHealth?.Invoke();
+
+    }
+
     protected void Fire()
     {
         if (!_isArleadyFiring)

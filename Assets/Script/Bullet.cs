@@ -6,7 +6,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
-    public int _damage;
+    [HideInInspector] public int _damage;
+
 
     void Update()
     {
@@ -19,6 +20,14 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
             collision.gameObject.GetComponent<KidController>().ApplyDamage(_damage);
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("DestructionZone"))
+        {
             Destroy(gameObject);
         }
     }
