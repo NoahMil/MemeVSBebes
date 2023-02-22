@@ -9,22 +9,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Animator _animator;
+    public GameObject bullet;
+    public GameObject freezebullet;
     [SerializeField] private Transform[] _playerLane;
     [SerializeField] private PlayerDatas _playerData;
-
+    [SerializeField] private GameObject pistolet;
     private int _playerPosition = 2;
-    public GameObject bullet;
-    public  int _damage;
+    public int _damage;
     public float DelayValue = 2f;
+    public float DelayFreezingValue = 2f;
+    [SerializeField] private AudioSource fireSE;
+    [SerializeField] private AudioSource firefreezeSE;
     private bool _isArleadyFiring = false;
-    
-    public delegate void UIEvent();
-    public static event UIEvent OnUpdateHealth;
-
     private void Start()
     {
         _playerData.LifePoint = _playerData.MaxLifePoint;
-        OnUpdateHealth?.Invoke();
+        _animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -44,18 +46,37 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
+            fireSE.Play();
+            _animator.SetTrigger("fire");
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            FireFreeze();
+            firefreezeSE.Play();
+            _animator.SetTrigger("fire");
+
         }
     }
+    
 
-    public void ApplyDamage(int _damage)
+    protected void FireFreeze()
     {
-        _playerData.LifePoint -= _damage;
-        if (_playerData.LifePoint <= 0)
+        if (!_isArleadyFiring)
         {
-            Destroy(gameObject);
-        }
-        OnUpdateHealth?.Invoke();
+            StartCoroutine(FireFreezeWithDelay());
+            _isArleadyFiring = true;
 
+        }    
+    }
+    
+    IEnumerator FireFreezeWithDelay()
+    {
+        Instantiate(freezebullet, pistolet.transform.position, pistolet.transform.rotation);
+        _animator.SetTrigger("canfire");
+        yield return new WaitForSeconds(DelayFreezingValue);
+        _isArleadyFiring = false;
     }
 
     protected void Fire()
@@ -69,8 +90,10 @@ public class Player : MonoBehaviour
     }
     IEnumerator FireWithDelay()
     {
-        GameObject bulletInstance = Instantiate(bullet, _playerLane[_playerPosition].transform.position, _playerLane[_playerPosition].transform.rotation);
+        
+        GameObject bulletInstance = Instantiate(bullet, pistolet.transform.position, pistolet.transform.rotation);
         bulletInstance.GetComponent<Bullet>()._damage = _damage;
+        _animator.SetTrigger("canfire");
         yield return new WaitForSeconds(DelayValue);
         
         _isArleadyFiring = false;

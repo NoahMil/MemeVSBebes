@@ -20,26 +20,23 @@ public class KidSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public Animator animator;
     public Text waveName;
-    
+
     private Wave currentWave;
     private int currentWaveNumber;
     private float nextSpawnTime;
     private bool canSpawn = true;
     private bool canAnimate = false;
 
-    private void Start()
-    {
-        animator.SetTrigger("WaveComplete");
-    }
+
 
     private void Update()
-    { 
-        currentWave= waves[currentWaveNumber];
+    {
+        currentWave = waves[currentWaveNumber];
         SpawnWave();
-         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Kid");
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Kid");
         if (totalEnemies.Length == 0)
         {
-            if (currentWaveNumber+1 != waves.Length && canAnimate)
+            if (currentWaveNumber + 1 != waves.Length && canAnimate)
             {
                 if (canAnimate)
                 {
@@ -53,27 +50,29 @@ public class KidSpawner : MonoBehaviour
 
     void SpawnWave()
     {
-      if (canSpawn && nextSpawnTime < Time.time)
-      {
-          GameObject randomEnemy =
-              currentWave.typeOfEnemies[UnityEngine.Random.Range(0, currentWave.typeOfEnemies.Length)];
-          Transform randomPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-          Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
-          currentWave.NbEnemies--;
-          nextSpawnTime = Time.time + currentWave.spawnInterval;
+        if (canSpawn && nextSpawnTime < Time.time)
+        {
+            GameObject randomEnemy =
+                currentWave.typeOfEnemies[UnityEngine.Random.Range(0, currentWave.typeOfEnemies.Length)];
+            Transform randomPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+            Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
+            currentWave.NbEnemies--;
+            nextSpawnTime = Time.time + currentWave.spawnInterval;
 
-          if (currentWave.NbEnemies == 0)
-          {
-              canSpawn = false;
-              canAnimate = true;
-          }
-      }
+            if (currentWave.NbEnemies == 0)
+            {
+                canSpawn = false;
+                canAnimate = true;
+            }
+        }
     }
+
     void SpawnNextWave()
     {
-        currentWaveNumber++; 
-        canSpawn = true; 
+        currentWaveNumber++;
+        canSpawn = true;
     }
-  
 }
+
+
 

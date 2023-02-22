@@ -4,7 +4,9 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ScriptableObject")] public class PlayerDatas : ScriptableObject
 {
-    [Header("STATS")] 
+    [Header("STATS")]
     public float MaxLifePoint;
     public float LifePoint;
+    public float movementSpeed;
+    public float freezeWeakness;
 }

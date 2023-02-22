@@ -6,61 +6,79 @@ using UnityEngine;
 
 public class KidController : MonoBehaviour
 {
-    public Player player;
-    [SerializeField] private  int _health;
-    [SerializeField] private  int _damage;
-    [SerializeField] private  float movementSpeed;
-    public float DelayValue = 2f;
-    private bool _isArleadyAttacking = false;
-    
+    [SerializeField] private float LifePoint;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float freezeWeakness;
+    [SerializeField] private AudioSource deadKidSE;
+
+    private bool frozen = false;
+    private float mTimeScale = 1f;
+    private float freezeTime = 5f;
     public delegate void UIEvent();
     public static event UIEvent OnUpdateScore;
     
     void Update()
     {
-        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime, 0, 0));
+
+        if (frozen)
+        {
+            if (mTimeScale > 0f)
+            {
+
+                mTimeScale = 0f;
+            }
+            else
+            {
+                freezeTime -= Time.deltaTime;
+                if (freezeTime <= 0f)
+                {
+                    UnFreeze();
+                }
+            }
+        }
+        transform.Translate(new Vector3(-movementSpeed * Time.deltaTime*mTimeScale, 0, 0));
+
     }
-    
-    public  void OnTriggerEnter2D(Collider2D other)
+
+
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("DestructionZone"))
         {
             Destroy(gameObject);
         }
     }
-    
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 9 )
         {
-            Debug.Log("Trigger!");
-            Attack();
+            Freeze();
         }
     }
 
     public void ApplyDamage(int _damage)
     {
-        _health -= _damage;
-        if (_health <= 0)
+        LifePoint -= _damage;
+        if (LifePoint <= 0)
         {
             Destroy(gameObject);
+            deadKidSE.Play();
             OnUpdateScore?.Invoke();
         }
-    }
-    
-    protected void Attack()
-    {
-        if (!_isArleadyAttacking)
-        {
-            StartCoroutine(AttackwithDelay());
-            _isArleadyAttacking = true;
 
-        }
     }
-    IEnumerator AttackwithDelay()
+
+    public void Freeze()
     {
-        yield return new WaitForSeconds(DelayValue);
-        player.ApplyDamage(_damage);
-        _isArleadyAttacking = false;
+        frozen = true;
+        freezeTime = freezeWeakness;
+    }
+
+    public void UnFreeze()
+    {
+        frozen = false;
+        mTimeScale = 1.0f;
+        freezeTime = 0f;
     }
 }
