@@ -120,12 +120,12 @@ TextureImporter:
       name: Freeze_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 1153
-        width: 665
-        height: 259
+        x: 47
+        y: 1154
+        width: 663
+        height: 314
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: Freeze_1
       rect:
         serializedVersion: 2
-        x: 811
-        y: 1183
-        width: 666
-        height: 261
+        x: 46
+        y: 687
+        width: 665
+        height: 314
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,11 +163,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1605
-        y: 1204
-        width: 667
-        height: 261
+        y: 1156
+        width: 663
+        height: 312
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: Freeze_3
       rect:
         serializedVersion: 2
-        x: 46
-        y: 688
+        x: 812
+        y: 1154
         width: 665
-        height: 260
+        height: 313
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -207,9 +207,9 @@ TextureImporter:
         x: 819
         y: 685
         width: 665
-        height: 261
+        height: 315
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

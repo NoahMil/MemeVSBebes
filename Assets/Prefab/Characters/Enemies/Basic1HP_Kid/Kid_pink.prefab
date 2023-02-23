@@ -131,7 +131,7 @@ MonoBehaviour:
   LifePoint: 1
   movementSpeed: 1
   freezeWeakness: 5
-  deadKidSE: {fileID: 2625385216366484762}
+  deadKidSE: {fileID: -636846125205079883, guid: feb1ce4078bb26441a7b2821161a6859, type: 3}
 --- !u!50 &4829922546511664877
 Rigidbody2D:
   serializedVersion: 4
@@ -183,7 +183,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cf531f2e14168994db59f1595bb117f6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 65506c6f358610a469a4738e32d837b2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

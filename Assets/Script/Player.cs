@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource fireSE;
     [SerializeField] private AudioSource firefreezeSE;
     private bool _isArleadyFiring = false;
+    private bool _isArleadyFiringFreeze = false;
     private void Start()
     {
         _playerData.LifePoint = _playerData.MaxLifePoint;
@@ -45,28 +46,24 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Fire();
-            fireSE.Play();
             _animator.SetTrigger("fire");
-            
+            Fire();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            FireFreeze();
-            firefreezeSE.Play();
             _animator.SetTrigger("fire");
-
+            FireFreeze();
         }
     }
     
 
     protected void FireFreeze()
     {
-        if (!_isArleadyFiring)
+        if (!_isArleadyFiringFreeze)
         {
             StartCoroutine(FireFreezeWithDelay());
-            _isArleadyFiring = true;
+            _isArleadyFiringFreeze = true;
 
         }    
     }
@@ -74,9 +71,10 @@ public class Player : MonoBehaviour
     IEnumerator FireFreezeWithDelay()
     {
         Instantiate(freezebullet, pistolet.transform.position, pistolet.transform.rotation);
+        firefreezeSE.Play();
         _animator.SetTrigger("canfire");
         yield return new WaitForSeconds(DelayFreezingValue);
-        _isArleadyFiring = false;
+        _isArleadyFiringFreeze = false;
     }
 
     protected void Fire()
@@ -93,6 +91,7 @@ public class Player : MonoBehaviour
         
         GameObject bulletInstance = Instantiate(bullet, pistolet.transform.position, pistolet.transform.rotation);
         bulletInstance.GetComponent<Bullet>()._damage = _damage;
+        fireSE.Play();
         _animator.SetTrigger("canfire");
         yield return new WaitForSeconds(DelayValue);
         
