@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class KidController : MonoBehaviour
 {
+    public KidSpawner kidSpawner;
     [SerializeField] private float LifePoint;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float freezeWeakness;
@@ -16,6 +17,8 @@ public class KidController : MonoBehaviour
     private float freezeTime = 5f;
     public delegate void UIEvent();
     public static event UIEvent OnUpdateScore;
+    
+
     
     void Update()
     {
@@ -40,12 +43,11 @@ public class KidController : MonoBehaviour
 
     }
 
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("DestructionZone"))
         {
-            Destroy(gameObject);
+            gameObject.transform.position = kidSpawner.spawnPoints[UnityEngine.Random.Range(0, kidSpawner.spawnPoints.Length)].position;
         }
     }
 
@@ -62,8 +64,8 @@ public class KidController : MonoBehaviour
         LifePoint -= _damage;
         if (LifePoint <= 0)
         {
-            Destroy(gameObject);
             deadKidSE.Play();
+            Destroy(gameObject);
             OnUpdateScore?.Invoke();
         }
 

@@ -27,8 +27,6 @@ public class KidSpawner : MonoBehaviour
     private bool canSpawn = true;
     private bool canAnimate = false;
 
-
-
     private void Update()
     {
         currentWave = waves[currentWaveNumber];
@@ -72,6 +70,8 @@ public class KidSpawner : MonoBehaviour
         currentWaveNumber++;
         canSpawn = true;
     }
+
+
 }
 
 

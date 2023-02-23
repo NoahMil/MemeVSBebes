@@ -39,11 +39,11 @@ public class Score : MonoBehaviour
     
     public void Lose()
     {
-        if (stolenCandies >= 5)
+        if (stolenCandies >= 3)
         {
-            Debug.Log("You Lose");
             SceneManager.LoadScene("YouLose");
         }
+        
     }
     
 }

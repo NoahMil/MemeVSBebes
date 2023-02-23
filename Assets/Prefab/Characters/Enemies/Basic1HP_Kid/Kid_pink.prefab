@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298fe544050cb9c44aeb114f76e02d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kidSpawner: {fileID: 4812179711805539956, guid: 5da7b399a2e4bf3458a09a1fb068fd8d, type: 3}
   LifePoint: 1
   movementSpeed: 1
   freezeWeakness: 5
@@ -183,7 +184,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cf531f2e14168994db59f1595bb117f6, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
