@@ -14,24 +14,22 @@ public class KidController : MonoBehaviour
     [SerializeField] private float sounddelay;
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider2D;
-
-    
-
     private bool frozen = false;
     private float mTimeScale = 1f;
     private float freezeTime = 5f;
+    private Animator _animator;
     public delegate void UIEvent();
     public static event UIEvent OnUpdateScore;
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider2D = GetComponent<Collider2D>();
     }
 
     void Update()
     {
-
         if (frozen)
         {
             if (mTimeScale > 0f)
@@ -75,7 +73,6 @@ public class KidController : MonoBehaviour
         { 
             deadKidSE.Play();
             StartCoroutine(deathKid());
-
         }
 
     } 
@@ -83,20 +80,25 @@ public class KidController : MonoBehaviour
     {
         _spriteRenderer.enabled = false; 
         _collider2D.enabled = false;
+        OnUpdateScore?.Invoke();
         yield return new WaitForSeconds(sounddelay);
         Destroy(gameObject);
-        OnUpdateScore?.Invoke();
     }
 
     public void Freeze()
     {
         frozen = true;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+        _animator.GetComponent<Animator>().enabled = false;
         freezeTime = freezeWeakness;
     }
 
     public void UnFreeze()
     {
         frozen = false;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        _animator.GetComponent<Animator>().enabled = true;
+        gameObject.transform.rotation = Quaternion.identity;
         mTimeScale = 1.0f;
         freezeTime = 0f;
     }

@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [HideInInspector] public int _damage;
-    [SerializeField] private AudioSource deadKidSE;
 
 
     void Update()

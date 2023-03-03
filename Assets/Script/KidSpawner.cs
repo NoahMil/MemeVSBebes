@@ -11,7 +11,8 @@ public class Wave
     public string waveName;
     public int NbEnemies;
     public GameObject[] typeOfEnemies;
-    public float spawnInterval;
+    public float spawnInterval;    
+    public bool closed;
 }
 
 public class KidSpawner : MonoBehaviour
@@ -20,7 +21,6 @@ public class KidSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public Animator animator;
     public Text waveName;
-
     private Wave currentWave;
     private int currentWaveNumber;
     private float nextSpawnTime;
@@ -64,12 +64,13 @@ public class KidSpawner : MonoBehaviour
             }
         }
     }
+        void SpawnNextWave()
+        {
+            currentWaveNumber++;
+            canSpawn = true;
+        }
 
-    void SpawnNextWave()
-    {
-        currentWaveNumber++;
-        canSpawn = true;
-    }
+    
 
 
 }
