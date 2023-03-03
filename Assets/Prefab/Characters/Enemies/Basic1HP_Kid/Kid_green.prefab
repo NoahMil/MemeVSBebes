@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3550409135081246457}
   - component: {fileID: 3550409135081246458}
   - component: {fileID: 3550409135081246461}
-  - component: {fileID: 8992711162783103229}
+  - component: {fileID: 1241119778699863607}
   m_Layer: 7
   m_Name: Kid_green
   m_TagString: Kid
@@ -148,11 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298fe544050cb9c44aeb114f76e02d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kidSpawner: {fileID: 4812179711805539956, guid: 5da7b399a2e4bf3458a09a1fb068fd8d, type: 3}
+  kidSpawner: {fileID: 7281784436204838617, guid: 5da7b399a2e4bf3458a09a1fb068fd8d, type: 3}
   LifePoint: 1
   movementSpeed: 1
   freezeWeakness: 5
-  deadKidSE: {fileID: -636846125205079883, guid: feb1ce4078bb26441a7b2821161a6859, type: 3}
+  deadKidSE: {fileID: 1241119778699863607}
+  sounddelay: 1
 --- !u!95 &3550409135081246461
 Animator:
   serializedVersion: 4
@@ -173,7 +174,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &8992711162783103229
+--- !u!82 &1241119778699863607
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

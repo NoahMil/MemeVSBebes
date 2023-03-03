@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bbea7d68bf3f65e47a65584d76acde8f
+guid: cc1bce20263e6504795236f0039b8c1e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anim-Idle_2
+      name: Anim-Idle(1)_1
       rect:
         serializedVersion: 2
-        x: 258
-        y: 93
-        width: 655
-        height: 1211
+        x: 310
+        y: 4289
+        width: 748
+        height: 1268
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2db83630b13ba57478f85f1178002ade
-      internalID: -313926347
+      spriteID: 3b7fab756af51d94d8457a81a52138f2
+      internalID: -2041111062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Anim-Idle_4
+      name: Anim-Idle(1)_3
       rect:
         serializedVersion: 2
-        x: 1582
-        y: 93
-        width: 595
-        height: 1226
+        x: 310
+        y: 2913
+        width: 749
+        height: 1253
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6930b5cf8de7afb4ca0b1a3f9567d4c2
-      internalID: 833294307
+      spriteID: 9ade7aeb96fd5b34d8101e81e0efbc37
+      internalID: -1689799101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim-Idle(1)_5
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 1583
+        width: 747
+        height: 1268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b662254dc45af44a634b83f8cd4eea
+      internalID: 109430536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Anim-Idle(1)_7
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 180
+        width: 748
+        height: 1253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7748c46b21b4d9342b13ac9973bcab44
+      internalID: 1501581116
       vertices: []
       indices: 
       edges: []
@@ -169,12 +211,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Anim-Idle_0: -483839131
-      Anim-Idle_3: -1610926523
-      Anim-Idle_5: -707271574
-      Anim-Idle_4: 833294307
-      Anim-Idle_1: 790958722
-      Anim-Idle_2: -313926347
+      Anim-Idle(1)_3: -1689799101
+      Anim-Idle(1)_2: -539132150
+      Anim-Idle(1)_0: 1213210114
+      Anim-Idle(1)_7: 1501581116
+      Anim-Idle(1)_5: 109430536
+      Anim-Idle(1)_1: -2041111062
+      Anim-Idle(1)_4: -1801700778
+      Anim-Idle(1)_6: -1883369475
+      Anim-Idle(1)_8: -1259377172
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

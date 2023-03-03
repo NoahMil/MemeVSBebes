@@ -11,15 +11,24 @@ public class KidController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float freezeWeakness;
     [SerializeField] private AudioSource deadKidSE;
+    [SerializeField] private float sounddelay;
+    private SpriteRenderer _spriteRenderer;
+    private Collider2D _collider2D;
+
+    
 
     private bool frozen = false;
     private float mTimeScale = 1f;
     private float freezeTime = 5f;
     public delegate void UIEvent();
     public static event UIEvent OnUpdateScore;
-    
 
-    
+    private void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider2D = GetComponent<Collider2D>();
+    }
+
     void Update()
     {
 
@@ -63,12 +72,20 @@ public class KidController : MonoBehaviour
     {
         LifePoint -= _damage;
         if (LifePoint <= 0)
-        {
+        { 
             deadKidSE.Play();
-            Destroy(gameObject);
-            OnUpdateScore?.Invoke();
+            StartCoroutine(deathKid());
+
         }
 
+    } 
+    IEnumerator deathKid()
+    {
+        _spriteRenderer.enabled = false; 
+        _collider2D.enabled = false;
+        yield return new WaitForSeconds(sounddelay);
+        Destroy(gameObject);
+        OnUpdateScore?.Invoke();
     }
 
     public void Freeze()
@@ -83,4 +100,6 @@ public class KidController : MonoBehaviour
         mTimeScale = 1.0f;
         freezeTime = 0f;
     }
+    
+    
 }
